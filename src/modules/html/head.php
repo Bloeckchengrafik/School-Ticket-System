@@ -4,7 +4,8 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <link rel="stylesheet" href="/assets/sass/root.css">
-<link rel="icon" href="/assets/img/favicon_dark.png" type="image/png" color="">
+<link rel="icon" href="/assets/img/favicon_dark_lg.png" type="image/png" media="prefers-color-scheme: light">
+<link rel="icon" href="/assets/img/favicon_light.png" type="image/png" media="prefers-color-scheme: dark">
 
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
 <link rel="stylesheet" href="/assets/vendor/tabler.css">
