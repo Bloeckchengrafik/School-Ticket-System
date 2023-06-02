@@ -1,0 +1,5 @@
+.idea
+src/vendor
+src/assets/sass/*.css
+src/assets/sass/*.css.map
+src/config/config.php
