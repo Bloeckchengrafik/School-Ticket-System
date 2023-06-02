@@ -1,5 +1,22 @@
 <?php
-include_once "include/mysql.php";
+include_once "modules/html/init.php";
+use modules\auth\Session as sess;
+use modules\auth\AccountType as accountType;
 
-$conn = Database\connection();
-echo "Hello World!";
+sess::authGuard(accountType::Supporter, accountType::Admin, accountType::Teacher);
+?>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <?php include_once "modules/html/head.php"; ?>
+    <title>Support</title>
+</head>
+<body>
+
+<div class="page">
+    Dashboard
+</div>
+
+<?php include_once "modules/html/scripts.php"; ?>
+</body>
+</html>

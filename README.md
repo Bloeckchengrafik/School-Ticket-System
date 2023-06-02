@@ -5,8 +5,13 @@ An unserer Schule sind inzwischen fast alle Räume mit digitalen Medien ausgesta
 Die Idee ist dabei folgende: Lehrer die bei Ihrer Arbeit auf einen technischen Fehler stoßen, den sie selbst nicht lösen können, greifen mit Hilfe eines Links auf das Ticket-System zu. In einem Formular
 können Sie den Raum und die Geräte auswählen, bei denen der Fehler aufgetreten ist und diesen beschreiben bzw. eine vorformulierte Fehlerbeschreibung auswählen. Die Fehlermeldung (das Ticket) soll in einer Datenbank gespeichert werden. Der Support greift über einen anderen Link auf das System zu und bekommt die Fehlermeldungen übersichtlich angezeigt. Nachdem ein Ticket vom Support bearbeitet wurde, erhält der Lehrer, der es angefordert hat, eine Rückmeldung. 
 
-# Project description (english)
+## Project description (english)
 
 Almost all rooms at our school are now equipped with digital media, as described in the two attached presentations. When using the media, there can be numerous technical errors and problems. For example, the image from the device is often not transmitted to the projector. This can be due to operating errors, but also to incorrectly plugged or defective cables. If such a problem cannot be solved by the teacher, he or she contacts the school support by e-mail. Since these error messages are often very unspecific and require queries, a ticket system is to be developed for the support.
 The idea is as follows: Teachers who encounter a technical error in their work that they cannot solve themselves access the ticket system using a link. In a form, they can select the room and devices where the error occurred and describe it or select a pre-formulated error description. The error message (the ticket) should be stored in a database. The support accesses the system via another link and gets the error messages displayed clearly. After a ticket has been processed by the support, the teacher who requested it receives feedback.
 
+## ER-Diagram & Relational Model
+
+The ER-Diagram is located under `er.drawio` in the root directory of the project.
+
+The Relational Model is located under `relational.md` in the root directory of the project.
