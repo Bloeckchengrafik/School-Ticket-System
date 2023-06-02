@@ -11,7 +11,7 @@ $connection = new PDO(
     $GLOBALS["config"]["mysql"]["password"]
 );
 
-function connection()
+function connection(): PDO
 {
     global $connection;
     return $connection;

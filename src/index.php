@@ -15,6 +15,7 @@ sess::authGuard(accountType::Supporter, accountType::Admin, accountType::Teacher
 
 <div class="page">
     Dashboard
+    <a href="logout.php">Logout</a>
 </div>
 
 <?php include_once "modules/html/scripts.php"; ?>

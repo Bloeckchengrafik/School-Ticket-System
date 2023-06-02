@@ -19,7 +19,8 @@ CREATE OR REPLACE TABLE UserPassKey (
 );
 
 CREATE OR REPLACE TABLE UserMagicLinkKey (
-    user_id INTEGER PRIMARY KEY,
+    user_id INTEGER,
     code varchar(255) NOT NULL,
+    PRIMARY KEY (user_id, code),
     FOREIGN KEY (user_id) REFERENCES User(user_id)
 );

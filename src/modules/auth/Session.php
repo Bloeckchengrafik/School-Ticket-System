@@ -49,8 +49,12 @@ class Session
             exit();
         }
 
+        if (count($requiredLevel) === 0) {
+            return;
+        }
+
         // Check if the user has the one of the possible account types
-        if (in_array($user->accountClass, $requiredLevel, true)) {
+        if (in_array($user->accountClass(), $requiredLevel, true)) {
             return;
         }
 
@@ -67,12 +71,22 @@ class Session
         $_SESSION[$key] = $value;
     }
 
-    private static function get($string): ?User
+    private static function get($string): ?string
     {
         if (self::has($string)) {
             return $_SESSION[$string];
         }
 
         return null;
+    }
+
+    public static function authGuardInvert(): void
+    {
+        $user = self::parseUser();
+
+        if ($user !== null) {
+            header("Location: /");
+            exit();
+        }
     }
 }
