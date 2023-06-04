@@ -1,7 +1,10 @@
 <?php
 include_once "modules/html/init.php";
+
 use modules\auth\Session as sess;
 use modules\auth\AccountType as accountType;
+
+$page = "dashboard";
 
 sess::authGuard(accountType::Supporter, accountType::Admin, accountType::Teacher);
 ?>
@@ -11,12 +14,19 @@ sess::authGuard(accountType::Supporter, accountType::Admin, accountType::Teacher
     <?php include_once "modules/html/head.php"; ?>
     <title>Support</title>
 </head>
-<body>
+<body class="page">
+<?php include_once "modules/html/nav.php"; ?>
 
-<div class="page">
-    Dashboard
-    <a href="logout.php">Logout</a>
+<div class="page-wrapper">
+    <div class="container card container-lg card-full">
+        <div class="card-header">
+            <h4 class="m0 text-muted caps sm">Dashboard</h4>
+            <h1 class="card-title mt0">Aktuelle Events</h1>
+        </div>
+    </div>
 </div>
+
+<span class="text-muted text-center margin-bottom-sm">&copy; 2023. Christian Bergschneider</span>
 
 <?php include_once "modules/html/scripts.php"; ?>
 </body>

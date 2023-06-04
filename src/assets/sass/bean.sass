@@ -1,0 +1,20 @@
+@import "theme"
+
+.bean
+    border: 1px solid #ccc
+    border-radius: 12px
+    width: min-content
+    padding: 3px 10px
+    color: #333 !important
+
+    &.admin
+        background-color: transparentize($admin-color, 0.8)
+        border-color: $admin-color
+
+    &.teacher
+        background-color: transparentize($teacher-color, 0.8)
+        border-color: $teacher-color
+
+    &.supporter
+        background-color: transparentize($supporter-color, 0.8)
+        border-color: $supporter-color

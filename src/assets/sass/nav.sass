@@ -8,3 +8,117 @@ a.navbar-brand
     &:hover
         color: $text-color
         text-decoration: none
+
+nav
+    background-color: $navbar-background
+    border-bottom: 1px solid $borders-color
+    color: $navbar-text
+    font-size: 1.25rem
+    padding: 0.7em 1.5em
+
+    > div
+        max-width: 1500px
+        margin: 0 auto
+
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+        > div
+            display: flex
+            align-items: center
+
+    ul
+        list-style: none
+        margin: 0
+        padding: 0
+
+        li
+            position: relative
+            display: inline-flex
+
+            --anim: 0
+
+            &:hover, &.active
+                --anim: 1
+
+            &::before
+                transition: all 0.3s ease-in-out
+                content: ""
+                position: absolute
+                bottom: -1px
+                left: 0
+                width: calc((100% - 1em) * var(--anim))
+                height: 2px
+                background-color: $primary-color
+
+            &::after
+                content: ""
+                display: block
+                width: 1px
+                height: 1.5em
+                background-color: $borders-color
+                margin: 0 0.5em
+
+            &:last-child
+                margin-right: 0
+
+                &::after
+                    display: none
+
+                &::before
+                    width: calc(100% * var(--anim))
+
+            a
+                color: $navbar-text
+                font-weight: 500
+
+                &:hover
+                    color: $navbar-text
+                    text-decoration: none
+
+    a.brand
+        color: $navbar-text
+
+        &:hover
+            color: $navbar-text
+            text-decoration: none
+
+    .brand
+        display: flex
+        align-items: center
+        margin-right: 1em
+        font-weight: 600
+
+        img
+            height: 2em
+            margin-right: 0.5em
+
+    .profilepicture
+        height: 2.2em
+        width: 2.2em
+        border-radius: 50%
+        margin-right: 0.5em
+
+    .user
+        display: flex
+        flex-direction: column
+
+        span
+            margin: 0
+            display: block
+            font-size: 1rem
+
+        span.sm
+            font-size: 0.8rem
+            color: $muted-color
+
+        .logout .material-icons
+            font-size: 2em
+            cursor: pointer
+            color: $navbar-text
+            margin-left: 0.5em
+
+        .logout:hover .material-icons
+            color: $navbar-text
+            text-decoration: none
