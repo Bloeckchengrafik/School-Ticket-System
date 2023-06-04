@@ -32,10 +32,10 @@ $isMagic = isset($_GET["magic"]);
     <body>
 
     <div class="page page-center">
-        <div class="container container-tight py-4">
-            <div class="text-center mb-4">
-                <a href="." class="navbar-brand d-block"><img src="/assets/img/favicon_dark.png" alt="" height="36"></a>
-                <a href="." class="navbar-brand d-block">CONTINUUM SUPPORT</a>
+        <div class="container container-tight">
+            <div class="text-center margin-bottom">
+                <a href="." class="navbar-brand block"><img src="/assets/img/favicon_dark.png" alt="" height="36"></a>
+                <a href="." class="navbar-brand block">CONTINUUM SUPPORT</a>
             </div>
             <?php
             $userError = false;
@@ -71,25 +71,26 @@ $isMagic = isset($_GET["magic"]);
 
             if (!$magicSent) {
                 ?>
-                <div class="card card-md">
+                <div class="card">
+                    <div class="card-header margin-bottom card-md">
+                        <h2 class="h2 text-center">Anmeldung</h2>
+                    </div>
                     <div class="card-body">
-                        <h2 class="h2 text-center mb-4">Anmeldung</h2>
                         <form action="login.php" method="post">
-                            <div class="mb-3">
+                            <div class="margin-bottom-sm">
                                 <label class="form-label">
-                                    E-Mail-Adresse
+                                    <span class="material-icons">mail</span> E-Mail-Adresse
                                     <input type="email" name="email" class="form-control"
                                            placeholder="email@example.com">
                                 </label>
                                 <?php if ($userError) { ?>
-                                    <span class="invalid-feedback d-block">Account wurde nicht gefunden</span>
+                                    <span class="invalid-feedback">Account wurde nicht gefunden</span>
                                 <?php } ?>
                             </div>
                             <?php if (!$isMagic) { ?>
-                                <div class="mb-2">
+                                <div class="margin-bottom-sm">
                                     <label class="form-label">
-                                        Passwort
-
+                                        <span class="material-icons">key</span> Passwort
                                         <input type="password" name="password" class="form-control"
                                                placeholder="Passwort"
                                                autocomplete="off">
@@ -108,13 +109,13 @@ $isMagic = isset($_GET["magic"]);
                                 </button>
                             </div>
                         </form>
-                        <div class="hr-text">oder</div>
+                        <div class="hr-text"><span>oder</span></div>
                         <div class="text-center">
                             <?php if ($isMagic): ?>
-                                <a href="?" class="btn btn-white btn-block" data-cold>Anmeldung per Nutzername und
+                                <a href="?" class="btn btn-white" data-cold>Anmeldung per Nutzername und
                                     Passwort</a>
                             <?php else: ?>
-                                <a href="?magic" class="btn btn-white btn-block" data-cold>Anmeldung per Link</a>
+                                <a href="?magic" class="btn btn-white" data-cold>Anmeldung per Link</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -131,7 +132,7 @@ $isMagic = isset($_GET["magic"]);
                     </div>
                 </div>
             <?php } ?>
-            <div class="text-center text-muted mt-3">
+            <div class="text-center text-muted margin-top">
                 &copy; 2023. Christian Bergschneider
             </div>
         </div>
