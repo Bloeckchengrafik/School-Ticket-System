@@ -23,17 +23,17 @@ $user = sess::parseUser();
             <ul class="navbar">
                 <li class="navitem <?php if ($page == "dashboard") {
                     echo "active";
-                } ?>"><a href="/">Dashboard</a></li>
+                } ?>"><a href="/"><span class="material-icons">speed</span>Dashboard</a></li>
                 <li class="navitem <?php if ($page == "tickets") {
                     echo "active";
-                } ?>"><a href="#">Meine Tickets</a></li>
+                } ?>"><a href="#"><span class="material-icons">apps</span>Meine Tickets</a></li>
                 <li class="navitem <?php if ($page == "newticket") {
                     echo "active";
-                } ?>"><a href="#">Neues Ticket</a></li>
+                } ?>"><a href="#"><span class="material-icons">edit_note</span>Neues Ticket</a></li>
                 <?php if ($user->accountClass() == AccountType::Admin) { ?>
                     <li class="navitem <?php if ($page == "admin") {
                         echo "active";
-                    } ?>"><a href="#">Benutzer verwalten</a></li>
+                    } ?>"><a href="/manage.php"><span class="material-icons">settings</span>Verwalten</a></li>
                 <?php } ?>
             </ul>
         </div>
