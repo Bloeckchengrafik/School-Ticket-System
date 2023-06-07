@@ -32,9 +32,9 @@ CREATE OR REPLACE TABLE UserMagicLinkKey (
 );
 
 CREATE OR REPLACE TABLE Room (
-    room_id INTEGER AUTO_INCREMENT,
-    building enum('Hauptgebäude', 'Westgebäuse', 'Q-Gebäude', 'Externes Gebäude') NOT NULL,
-    PRIMARY KEY (room_id, building)
+    room_id varchar(255) NOT NULL,
+    building enum('Hauptgebäude', 'Westgebäude', 'Q-Gebäude', 'Externes Gebäude') NOT NULL,
+    PRIMARY KEY (room_id)
 );
 
 CREATE OR REPLACE TABLE Device (
@@ -49,7 +49,7 @@ CREATE OR REPLACE TABLE Ticket (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status enum('open', 'closed') NOT NULL,
     user_id INTEGER NOT NULL,
-    room_id INTEGER NOT NULL,
+    room_id varchar(255) NOT NULL,
     device_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (room_id) REFERENCES Room(room_id),

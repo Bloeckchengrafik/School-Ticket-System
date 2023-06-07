@@ -1,0 +1,62 @@
+@import "theme"
+
+.alert
+  padding: 1rem 1.5rem
+  margin-bottom: 1rem
+  border: 1px solid transparent
+  border-radius: $border-radius
+  width: 100%
+  display: flex
+  align-items: center
+  justify-content: space-between
+  position: relative
+  transition: all 0.3s ease-in-out
+
+  &.alert-success
+    background-color: $success-bg
+    color: $success-color
+    border-color: $success-border
+
+  &.alert-danger
+    background-color: $danger-bg
+    color: $danger-color
+    border-color: $danger-border
+
+  &.alert-warning
+    background-color: $warning-bg
+    color: $warning-color
+    border-color: $warning-border
+
+  &.alert-info
+    background-color: $info-bg
+    color: $info-color
+    border-color: $info-border
+
+  &.alert-dismissible
+    padding-right: 4rem
+
+  &.alert-dismissible .close
+    position: absolute
+    top: 0
+    right: 0
+    padding: 1rem 1.5rem
+    color: inherit
+
+    &:hover
+      color: inherit
+
+  &.alert-icon
+    padding-left: 3rem
+    position: relative
+
+    &:before
+      content: ""
+      position: absolute
+      left: 0
+      top: 0
+      bottom: 0
+      width: 3rem
+      display: flex
+      align-items: center
+      justify-content: center
+      font-size: 1.5rem

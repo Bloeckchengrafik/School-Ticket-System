@@ -1,0 +1,56 @@
+@import "theme"
+
+table
+  border-collapse: collapse
+  width: 100%
+  th, td
+    text-align: left
+    padding: 8px
+  tr:nth-child(even)
+    background-color: #fefefe
+  th
+    background-color: $shadow-bg
+    color: $shadow-color
+    border-bottom: 1px solid $borders-color
+
+  tr
+    cursor: pointer
+    border-bottom: 1px solid $borders-color
+
+    &:hover
+      background-color: $shadow-bg
+      color: $shadow-color
+
+  tr:last-child
+    border-bottom: none
+
+  td>input
+    width: 100%
+    border: none
+    background-color: transparent
+    text-align: left
+    &:focus
+      outline: none
+      border: none
+      background-color: transparent
+      text-align: left
+      box-shadow: none
+
+  td>input:disabled
+    background-color: transparent
+    text-align: left
+    box-shadow: none
+    border: none
+    color: $muted-color
+
+  td>select
+    width: 100%
+    border: none
+    background-color: transparent
+    text-align: left
+    &:focus
+      outline: none
+      border: none
+      background-color: transparent
+      text-align: left
+      box-shadow: none
