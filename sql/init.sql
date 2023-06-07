@@ -82,3 +82,70 @@ CREATE OR REPLACE TABLE PresetMessage (
     content varchar(255) NOT NULL,
     FOREIGN KEY (device_id) REFERENCES Device(device_id)
 );
+
+INSERT INTO dev.Device (device_name, device_description)
+VALUES ('Beamer', 'groß, weiß, über der Tafel');
+
+INSERT INTO dev.Device (device_name, device_description)
+VALUES ('Lautsprecher', 'oben rechts und oben links');
+
+INSERT INTO dev.Device (device_name, device_description)
+VALUES ('Projektionsfläche', 'groß, weiß, hinter der Tafel');
+
+INSERT INTO dev.Device (device_name, device_description)
+VALUES ('Bedienbox', 'auch: Epsonbox');
+
+INSERT INTO dev.Device (device_name, device_description)
+VALUES ('PC', 'Kasten unter dem Bildschirm');
+
+INSERT INTO dev.Device (device_name, device_description)
+VALUES ('Bildschirm', 'Kasten auf dem PC');
+
+INSERT INTO dev.Device (device_name, device_description)
+VALUES ('Dokumentenkamera', 'Hat die Aufschrift "EPSON"');
+
+INSERT INTO dev.Device (device_name, device_description)
+VALUES ('Maus', 'Bediengerät mit wenigen Tasten');
+
+INSERT INTO dev.Device (device_name, device_description)
+VALUES ('Tastatur', 'Bediengerät mit vielen Tasten');
+
+INSERT INTO dev.Device (device_name, device_description)
+VALUES ('Switch', 'Gerät mit Knopf darauf');
+
+INSERT INTO dev.PresetMessage (device_id, name, content)
+VALUES (1, 'Beamer geht nicht an', 'Der Beamer in diesem Raum geht nicht an');
+
+INSERT INTO dev.PresetMessage (device_id, name, content)
+VALUES (1, 'Beamer hat nur ein blaues Bild', 'Der Beamer hat nur ein blaues Bild');
+
+INSERT INTO dev.PresetMessage (device_id, name, content)
+VALUES (2, 'Keinen Ton', 'Ich höre hier keinen Ton');
+
+INSERT INTO dev.PresetMessage (device_id, name, content)
+VALUES (2, 'Ton verzerrt', 'Der Ton ist hier sehr verzerrt');
+
+INSERT INTO dev.PresetMessage (device_id, name, content)
+VALUES (3, 'Nichts zu erkennen', 'Auf der Projektionsfläche ist nichts zu erkennen');
+
+INSERT INTO dev.PresetMessage (device_id, name, content)
+VALUES (4, 'Die Bedienbox fehlt', 'Die Bedienbox fehlt in diesem Raum');
+
+INSERT INTO dev.PresetMessage (device_id, name, content)
+VALUES (5, 'Nicht an', 'Der PC geht nicht an');
+
+INSERT INTO dev.PresetMessage (device_id, name, content)
+VALUES (6, 'Nicht an', 'Der Bildschirm geht nicht an');
+
+INSERT INTO dev.PresetMessage (device_id, name, content)
+VALUES (7, 'Funktioniert nicht', 'Die Dokumentenkamera funktioniert nicht');
+
+INSERT INTO dev.PresetMessage (device_id, name, content)
+VALUES (8, 'Funktioniert nicht', 'Die Maus funktioniert nicht');
+
+INSERT INTO dev.PresetMessage (device_id, name, content)
+VALUES (9, 'Funktioniert nicht', 'Die Tastatur funktioniert nicht');
+
+INSERT INTO dev.PresetMessage (device_id, name, content)
+VALUES (10, 'Schalten geht nicht', 'Ich kann nicht zwischen den Quellen Hin-und-her-wechseln');
+
