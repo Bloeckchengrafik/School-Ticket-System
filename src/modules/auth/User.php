@@ -90,4 +90,9 @@ class User
         $mail = new Mailer();
         $mail->send($this->email, "Continuum Password Reset", $rendered);
     }
+
+    public function __toString(): string
+    {
+        return $this->firstName . " " . $this->lastName;
+    }
 }

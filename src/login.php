@@ -109,7 +109,7 @@ $isMagic = isset($_GET["magic"]);
                                 </button>
                             </div>
                         </form>
-                        <div class="hr-text"><span>oder</span></div>
+                        <div class="hr-text">oder</div>
                         <div class="text-center">
                             <?php if ($isMagic): ?>
                                 <a href="?" class="btn btn-white" data-cold>Anmeldung per Nutzername und

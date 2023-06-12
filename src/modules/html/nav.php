@@ -29,7 +29,7 @@ $user = sess::parseUser();
                 } ?>"><a href="#"><span class="material-icons">apps</span>Meine Tickets</a></li>
                 <li class="navitem <?php if ($page == "newticket") {
                     echo "active";
-                } ?>"><a href="#"><span class="material-icons">edit_note</span>Neues Ticket</a></li>
+                } ?>"><a href="/new_ticket.php"><span class="material-icons">edit_note</span>Neues Ticket</a></li>
                 <?php if ($user->accountClass() == AccountType::Admin) { ?>
                     <li class="navitem <?php if ($page == "admin") {
                         echo "active";

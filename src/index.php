@@ -20,8 +20,7 @@ sess::authGuard(accountType::Supporter, accountType::Admin, accountType::Teacher
 <div class="page-wrapper">
     <div class="container card container-lg card-full">
         <div class="card-header">
-            <h4 class="m0 text-muted caps sm">Dashboard</h4>
-            <h1 class="card-title mt0">Aktuelle Events</h1>
+            <h1 class="mt0">Aktuelle Events</h1>
         </div>
     </div>
 </div>

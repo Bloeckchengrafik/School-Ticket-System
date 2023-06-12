@@ -93,8 +93,7 @@ $users = $userStmt->fetchAll();
 
     <form class="container card container-lg card-full" method="post" action="">
         <div class="card-header">
-            <h4 class="m0 text-muted caps sm">Admin</h4>
-            <h1 class="card-title mt0">Räume</h1>
+            <h1 class="mt0">Räume</h1>
         </div>
         <div class="card-body">
             <table>
@@ -145,8 +144,7 @@ $users = $userStmt->fetchAll();
     </form>
     <div class="container card container-lg card-full">
         <div class="card-header">
-            <h4 class="m0 text-muted caps sm">Admin</h4>
-            <h1 class="card-title mt0">Benutzerverwaltung</h1>
+            <h1 class="mt0">Benutzerverwaltung</h1>
         </div>
         <form class="card-body" method="post" action="">
             <table>
