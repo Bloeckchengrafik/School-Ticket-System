@@ -34,8 +34,8 @@ $isMagic = isset($_GET["magic"]);
     <div class="page page-center">
         <div class="container container-tight">
             <div class="text-center margin-bottom">
-                <a href="." class="navbar-brand block"><img src="/assets/img/favicon_dark.png" alt="" height="36"></a>
-                <a href="." class="navbar-brand block">CONTINUUM SUPPORT</a>
+                <a href="." class="navbar-brand d-block"><img src="/assets/img/favicon_dark.png" alt="" height="36"></a>
+                <a href="." class="navbar-brand d-block">CONTINUUM SUPPORT</a>
             </div>
             <?php
             $userError = false;
@@ -84,7 +84,7 @@ $isMagic = isset($_GET["magic"]);
                                            placeholder="email@example.com">
                                 </label>
                                 <?php if ($userError) { ?>
-                                    <span class="invalid-feedback">Account wurde nicht gefunden</span>
+                                    <span class="invalid-feedback d-block">Account wurde nicht gefunden</span>
                                 <?php } ?>
                             </div>
                             <?php if (!$isMagic) { ?>

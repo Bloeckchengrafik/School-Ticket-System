@@ -4,6 +4,9 @@ namespace modules\db\Models;
 
 use modules\auth\User;
 use modules\db\Users;
+use modules\mail\Mailer;
+use modules\mail\View;
+use PDOException;
 use function Database\connection;
 
 class Ticket
@@ -57,6 +60,28 @@ class Ticket
         return $result["created_at"];
     }
 
+    public function userHasNewMessages($user_id): bool {
+        $conn = connection();
+        $stmt = $conn->prepare("SELECT message_id FROM ReadTo WHERE ticket_id = :ticket_id AND user_id = :user_id AND message_id >= (SELECT message_id FROM Message WHERE ticket_id = :ticket_id ORDER BY message_id DESC LIMIT 1)");
+        $stmt->bindParam(":ticket_id", $this->ticket_id);
+        $stmt->bindParam(":user_id", $user_id);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+        return count($result) == 0;
+    }
+
+    public function userIsMember($user_id): bool {
+        $conn = connection();
+        $stmt = $conn->prepare("SELECT user_id FROM isMemberIn WHERE ticket_id = :ticket_id AND user_id = :user_id");
+        $stmt->bindParam(":ticket_id", $this->ticket_id);
+        $stmt->bindParam(":user_id", $user_id);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+        return count($result) > 0;
+    }
+
     public function stateTransition($newState): void
     {
         $conn = connection();
@@ -90,9 +115,13 @@ class Ticket
         $stmt = $conn->prepare("INSERT INTO isMemberIn (user_id, ticket_id) VALUES (:user_id, :ticket_id)");
         $stmt->bindParam(":user_id", $userId);
         $stmt->bindParam(":ticket_id", $this->ticket_id);
-        $stmt->execute();
 
-        $this->send($firstName . " " . $lastName . " ist beigetreten", $userId, "hr");
+        try {
+            $stmt->execute();
+            $this->send($firstName . " " . $lastName . " ist beigetreten", $userId, "hr");
+        } catch (PDOException) {
+        }
+
     }
 
     public function removeMember($userId, $firstName, $lastName): void {
@@ -128,7 +157,33 @@ class Ticket
 
     public function send($content, $user_id, $message_type = "standard"): Message
     {
-        return Message::send($content, $message_type, $user_id, $this->ticket_id);
+        $msg = Message::send($content, $message_type, $user_id, $this->ticket_id);
+
+        // When the user id is the same as the sender id, don't send a mail
+        if ($user_id == $this->user()->userID) {
+            return $msg;
+        }
+
+        if ($message_type != "standard") {
+            return $msg;
+        }
+
+        $view = new View("activity");
+        $html = $view->render(["ticket" => $this, "user" => Users::byId($user_id)]);
+        Mailer::send($this->user()->email, "Neue Nachricht in Ticket #" . $this->ticket_id, $html);
+
+        Mailer::sendAllLast(); // flush all mails
+
+        return $msg;
+    }
+
+    public function markRead(int $userID): void
+    {
+        $conn = connection();
+        $stmt = $conn->prepare("INSERT INTO ReadTo (user_id, message_id, ticket_id) VALUES (:user_id, (SELECT message_id FROM Message WHERE ticket_id = :ticket_id ORDER BY message_id DESC LIMIT 1), :ticket_id) ON DUPLICATE KEY UPDATE ticket_id = :ticket_id");
+        $stmt->bindParam(":user_id", $userID);
+        $stmt->bindParam(":ticket_id", $this->ticket_id);
+        $stmt->execute();
     }
 
     public static function create($title, $status, $userId, $roomId, $deviceId): Ticket
@@ -143,6 +198,11 @@ class Ticket
         $stmt->execute();
 
         return new Ticket($conn->lastInsertId(), $title, $status, $userId, $roomId, $deviceId);
+    }
+
+    public static function allFrom(int $userID): array
+    {
+        return self::query("user_id = :user_id", ["user_id" => $userID]);
     }
 
     public static function byId($id): ?Ticket
@@ -163,8 +223,78 @@ class Ticket
 
     public static function all(): array
     {
+        return self::query("1", []);
+    }
+
+    private static function query($where, $params): array {
         $conn = connection();
-        $stmt = $conn->prepare("SELECT * FROM Ticket");
+        $stmt = $conn->prepare("SELECT * FROM Ticket WHERE " . $where . " ORDER BY created_at DESC");
+        foreach ($params as $key => $value) {
+            $stmt->bindParam(":" . $key, $value);
+        }
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+
+        $tickets = [];
+
+        foreach ($result as $ticket) {
+            $tickets[] = new Ticket($ticket["ticket_id"], $ticket["title"], $ticket["status"], $ticket["user_id"], $ticket["room_id"], $ticket["device_id"]);
+        }
+
+        // Pin closed tickets to the bottom
+        usort($tickets, function($a, $b) {
+            if ($a->status == "closed" && $b->status != "closed") {
+                return 1;
+            } else if ($a->status != "closed" && $b->status == "closed") {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+
+        return $tickets;
+    }
+
+    public static function allWithUnreadMessages($user_id, $all=false): array
+    {
+        $conn = connection();
+
+        if ($all) {
+            $stmt = $conn->prepare("
+SELECT *
+FROM Ticket,
+     Message
+WHERE Ticket.ticket_id
+  AND Message.ticket_id = Ticket.ticket_id
+  AND Message.message_id IN (SELECT MAX(message_id)
+                             FROM Message
+                             WHERE ticket_id = Ticket.ticket_id)
+  AND message_id NOT IN (SELECT message_id
+                         FROM ReadTo
+                         WHERE user_id = :user_id)
+  AND (SELECT COUNT(*)
+       FROM isMemberIn
+       WHERE isMemberIn.ticket_id = Ticket.ticket_id
+         AND isMemberIn.user_id = :user_id) > 0
+");
+        } else {
+            $stmt = $conn->prepare("
+SELECT *
+FROM Ticket,
+     Message
+WHERE Ticket.ticket_id
+  AND Message.ticket_id = Ticket.ticket_id
+  AND Message.message_id IN (SELECT MAX(message_id)
+                             FROM Message
+                             WHERE ticket_id = Ticket.ticket_id)
+  AND message_id NOT IN (SELECT message_id
+                         FROM ReadTo
+                         WHERE user_id = :user_id)
+");
+        }
+
+        $stmt->bindParam(":user_id", $user_id);
         $stmt->execute();
 
         $result = $stmt->fetchAll();

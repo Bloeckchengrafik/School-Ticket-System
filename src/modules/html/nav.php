@@ -26,7 +26,19 @@ $user = sess::parseUser();
                 } ?>"><a href="/"><span class="material-icons">speed</span>Dashboard</a></li>
                 <li class="navitem <?php if ($page == "tickets") {
                     echo "active";
-                } ?>"><a href="#"><span class="material-icons">apps</span>Meine Tickets</a></li>
+                } ?>"><a href="/tickets.php"><span class="material-icons">apps</span><?php
+
+                        switch ($user->accountClass()) {
+                            case AccountType::Supporter:
+                            case AccountType::Admin:
+                                echo "Alle";
+                                break;
+                            case AccountType::Teacher:
+                                echo "Deine";
+                                break;
+                        }
+
+                        ?> Tickets</a></li>
                 <li class="navitem <?php if ($page == "newticket") {
                     echo "active";
                 } ?>"><a href="/new_ticket.php"><span class="material-icons">edit_note</span>Neues Ticket</a></li>
@@ -38,12 +50,12 @@ $user = sess::parseUser();
             </ul>
         </div>
         <div>
-            <img class="profilepicture" src="<?php
+            <div class="avatar bg-cover me-2" style="background-image: url('<?php
             // Hash the email to prevent direct access to the profile picture
             $profilePictureSeed = md5($user->userID . $user->email);
             echo "https://rest.devstorage.eu/user/avatar/" .
                 $profilePictureSeed;
-            ?>" alt="PROFILE" height="32">
+            ?>')"></div>
             <div class="user">
                 <span>
                     <?php

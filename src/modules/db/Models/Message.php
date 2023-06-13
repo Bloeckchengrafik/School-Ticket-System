@@ -10,7 +10,7 @@ class Message
     public int $message_id;
     public string $content;
     public string $message_type;
-    public DateTime $created_at;
+    public string $created_at;
     public int $user_id;
     public int $ticket_id;
 
@@ -51,6 +51,6 @@ class Message
         $stmt->bindParam(":ticket_id", $ticket_id);
         $stmt->execute();
 
-        return new Message($conn->lastInsertId(), $content, $message_type, new DateTime(), $user_id, $ticket_id);
+        return new Message($conn->lastInsertId(), $content, $message_type, "", $user_id, $ticket_id);
     }
 }
