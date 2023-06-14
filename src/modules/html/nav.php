@@ -50,12 +50,7 @@ $user = sess::parseUser();
             </ul>
         </div>
         <div>
-            <div class="avatar bg-cover me-2" style="background-image: url('<?php
-            // Hash the email to prevent direct access to the profile picture
-            $profilePictureSeed = md5($user->userID . $user->email);
-            echo "https://rest.devstorage.eu/user/avatar/" .
-                $profilePictureSeed;
-            ?>')"></div>
+            <div class="avatar bg-cover me-2 bg-danger-lt"><?= User::prepareInitials($user->firstName, $user->lastName) ?></div>
             <div class="user">
                 <span>
                     <?php

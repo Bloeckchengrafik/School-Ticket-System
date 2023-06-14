@@ -3,6 +3,7 @@ include_once "modules/html/init.php";
 
 use modules\auth\Session as sess;
 use modules\auth\AccountType as accountType;
+use modules\auth\User;
 use modules\db\Models\Message;
 use modules\db\Models\Ticket;
 use modules\db\Users;
@@ -50,6 +51,8 @@ if (isset($_POST["message"])) {
 
 $ticket->markRead($user->userID);
 $messages = $ticket->messages();
+
+$is_member = in_array($user->userID, $ticket->members())
 
 ?>
 <!DOCTYPE html>
@@ -99,7 +102,7 @@ $messages = $ticket->messages();
                 <div class="col-auto ms-auto">
                     <div class="btn-list">
                         <?php
-                        if (in_array($user->userID, $ticket->members())) {
+                        if ($is_member) {
                             ?>
                             <a href="?id=<?= $ticket->ticket_id ?>&leave"
                                class="btn btn-red">
@@ -156,18 +159,11 @@ $messages = $ticket->messages();
                                      as $message) {
                                 /* @var $message Message */
 
+                                $userOfMessage = Users::byId($message->user_id);
                                 ?>
                                 <li class="timeline-event">
-                                    <div class="timeline-event-icon avatar bg-cover"
-                                         style="background-image: url('<?php
-
-                                         $userOfMessage = Users::byId($message->user_id);
-
-                                         // Hash the email to prevent direct access to the profile picture
-                                         $profilePictureSeed = md5($message->user_id . $userOfMessage->email);
-                                         echo "https://rest.devstorage.eu/user/avatar/" .
-                                             $profilePictureSeed;
-                                         ?>')"></div>
+                                    <div
+                                        class="timeline-event-icon avatar bg-danger-lt"><?= User::prepareInitials($user->firstName, $user->lastName) ?></div>
 
                                     <?php
 
@@ -193,17 +189,11 @@ $messages = $ticket->messages();
                                 <?php
                             }
 
-                            if (in_array($user->userID, $ticket->members()) && $ticket->status == "open") {
+                            if ($is_member && $ticket->status == "open") {
                                 ?>
                                 <li class="timeline-event">
-                                    <div class="timeline-event-icon avatar bg-cover"
-                                         style="background-image: url('<?php
-
-                                         // Hash the email to prevent direct access to the profile picture
-                                         $profilePictureSeed = md5($user->userID . $user->email);
-                                         echo "https://rest.devstorage.eu/user/avatar/" .
-                                             $profilePictureSeed;
-                                         ?>')"></div>
+                                    <div
+                                        class="timeline-event-icon avatar bg-cover bg-danger-lt"><?= User::prepareInitials($user->firstName, $user->lastName) ?></div>
                                     <div class="card timeline-event-card">
                                         <div class="card-body">
                                             <form action="" method="post">

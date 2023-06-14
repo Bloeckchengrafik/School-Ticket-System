@@ -89,7 +89,7 @@ use modules\auth\User;
     </p>
 
     <p>
-        Nach dem ersten Login kannst du dein Passwort ändern.
+        Nach dem ersten Login kannst du dein Passwort &auml;ndern.
     </p>
 
     <p>

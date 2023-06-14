@@ -32,7 +32,7 @@ use modules\mail\Mailer;
                                 <label class="form-label">
                                     E-Mail-Adresse
                                     <input type="email" name="mail" class="form-control"
-                                           placeholder="Email">
+                                           placeholder="Email" required>
                                 </label>
                             </div>
                             <div class="form-footer text-center">

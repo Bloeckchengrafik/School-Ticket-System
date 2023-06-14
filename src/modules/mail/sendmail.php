@@ -3,7 +3,12 @@ include_once "modules/html/init.php";
 
 use modules\mail\Mailer;
 
-exec("touch " . __DIR__ . "/mail.log");
+// Create a log file
+if (!file_exists(__DIR__ . "/mail.log")) {
+    $file = fopen(__DIR__ . "/mail.log", "w");
+    fwrite($file, "Mail log created at " . date("d.m.Y H:i:s") . "\n");
+    fclose($file);
+}
 
 function logMail($message): void
 {

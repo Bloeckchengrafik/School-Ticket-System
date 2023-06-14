@@ -18,7 +18,8 @@ class User
     public string $accountClass;
     public string $createdAt;
 
-    function __construct($userID, $firstName, $lastName, $email, $accountClass, $createdAt) {
+    function __construct($userID, $firstName, $lastName, $email, $accountClass, $createdAt)
+    {
         $this->userID = $userID;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -94,5 +95,11 @@ class User
     public function __toString(): string
     {
         return $this->firstName . " " . $this->lastName;
+    }
+
+    public static function prepareInitials(string $firstName, string $lastName): string
+    {
+        $initials = substr($firstName, 0, 1) . substr($lastName, 0, 1);
+        return strtoupper($initials);
     }
 }

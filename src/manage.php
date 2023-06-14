@@ -121,7 +121,7 @@ $users = $userStmt->fetchAll();
                 <tr>
                     <td>
                         <label for="id"></label>
-                        <input type="text" name="id" id="id" placeholder="ENTER ROOM ID">
+                        <input type="text" name="id" id="id" placeholder="ENTER ROOM ID" required>
                     </td>
                     <td>
                         <label for="building"></label>
@@ -172,19 +172,19 @@ $users = $userStmt->fetchAll();
             <dialog id="create" class="form">
                 <div class="form-control">
                     <label for="first_name">Vorname</label>
-                    <input type="text" name="first_name" id="first_name">
+                    <input type="text" name="first_name" id="first_name" required>
                 </div>
                 <div class="form-control">
                     <label for="last_name">Nachname</label>
-                    <input type="text" name="last_name" id="last_name">
+                    <input type="text" name="last_name" id="last_name" required>
                 </div>
                 <div class="form-control">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email">
+                    <input type="email" name="email" id="email" required>
                 </div>
                 <div class="form-control">
                     <label for="account_class">Account-Klasse</label>
-                    <select name="account_class" id="account_class">
+                    <select name="account_class" id="account_class" required>
                         <option value="admin">Admin</option>
                         <option value="supporter">Support</option>
                         <option value="teacher">Lehrer</option>

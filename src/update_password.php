@@ -94,7 +94,7 @@ if (isset($_POST["password"])) {
                                     Altes Passwort
                                     <input type="password" name="old_password" class="form-control"
                                            placeholder="Passwort"
-                                           autocomplete="off">
+                                           autocomplete="off" required>
                                 </label>
                                 <?php if ($oldWrong) { ?>
                                     <div class="invalid-feedback d-block">
@@ -108,7 +108,7 @@ if (isset($_POST["password"])) {
                                 Neues Passwort
                                 <input type="password" name="password" class="form-control"
                                        placeholder="Passwort"
-                                       autocomplete="off">
+                                       autocomplete="off" required>
                             </label>
                         </div>
                         <div class="mb-2">

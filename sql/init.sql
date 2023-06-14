@@ -99,7 +99,10 @@ CREATE OR REPLACE TABLE ReadTo
     user_id    INTEGER,
     message_id INTEGER,
     ticket_id  INTEGER,
-    PRIMARY KEY (user_id, message_id, ticket_id)
+    PRIMARY KEY (user_id, message_id, ticket_id),
+    FOREIGN KEY (user_id) REFERENCES User (user_id),
+    FOREIGN KEY (message_id) REFERENCES Message (message_id),
+    FOREIGN KEY (ticket_id) REFERENCES Ticket (ticket_id)
 );
 
 CREATE OR REPLACE TABLE Email

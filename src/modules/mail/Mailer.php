@@ -27,13 +27,24 @@ class Mailer
         $jobs[] = $id;
     }
 
+    private static function launchBackgroundProc($command): void
+    {
+        if(PHP_OS=='WINNT' || PHP_OS=='WIN32' || PHP_OS=='Windows'){
+            $command = 'start "" '. $command;
+        } else {
+            $command = $command .' /dev/null &';
+        }
+        $handle = popen($command, 'r');
+        if($handle!==false) {
+            pclose($handle);
+        }
+    }
+
     static function sendAllLast(): void
     {
         global $jobs;
         foreach ($jobs as $job) {
-            // Start a new process
-            $command = "php " . __DIR__ . "/sendmail.php " . $job . "&";
-            exec($command);
+            self::launchBackgroundProc("php " . __DIR__ . "/sendmail.php " . $job);
         }
     }
 

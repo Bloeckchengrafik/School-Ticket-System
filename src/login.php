@@ -81,7 +81,7 @@ $isMagic = isset($_GET["magic"]);
                                 <label class="form-label">
                                     <span class="material-icons">mail</span> E-Mail-Adresse
                                     <input type="email" name="email" class="form-control"
-                                           placeholder="email@example.com">
+                                           placeholder="email@example.com" required>
                                 </label>
                                 <?php if ($userError) { ?>
                                     <span class="invalid-feedback d-block">Account wurde nicht gefunden</span>
@@ -93,7 +93,7 @@ $isMagic = isset($_GET["magic"]);
                                         <span class="material-icons">key</span> Passwort
                                         <input type="password" name="password" class="form-control"
                                                placeholder="Passwort"
-                                               autocomplete="off">
+                                               autocomplete="off" required>
                                     </label>
                                     <span class="form-label-description"><a
                                             href="forgot-password.php">Passwort vergessen?</a></span>

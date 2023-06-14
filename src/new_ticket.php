@@ -56,13 +56,13 @@ if (isset($_POST["title"]) && isset($_POST["building"]) && isset($_POST["room"])
                 <label class="form-label">
                     <span class="material-icons">edit_note</span> Titel
                     <input type="text" name="title" class="form-control"
-                           placeholder="Titel einfügen...">
+                           placeholder="Titel einfügen..." required>
                 </label>
             </div>
             <div class="margin-bottom-sm lr row">
                 <label class="form-label flex-grow col">
                     <span class="material-icons">apartment</span> Geb&auml;ude
-                    <select name="building" class="form-control" id="building" onchange="changeBuilding()">
+                    <select name="building" class="form-control" id="building" onchange="changeBuilding()" required>
                         <option value="" disabled>SELECT BUILDING</option>
                         <option value="Hauptgebäude">Hauptgeb&auml;ude</option>
                         <option value="Westgebäude">Westgeb&auml;ude</option>
@@ -72,7 +72,7 @@ if (isset($_POST["title"]) && isset($_POST["building"]) && isset($_POST["room"])
                 </label>
                 <label class="form-label flex-grow col">
                     <span class="material-icons">room</span> Raum
-                    <select name="room" class="form-control">
+                    <select name="room" class="form-control" required>
                         <option value="" disabled>SELECT BUILDING FIRST</option>
                         <?php
                         $rooms = $conn->query("SELECT * FROM Room");
@@ -89,7 +89,7 @@ if (isset($_POST["title"]) && isset($_POST["building"]) && isset($_POST["room"])
             <div class="margin-bottom-sm lr row">
                 <label class="form-label flex-grow col">
                     <span class="material-icons">devices</span> Ger&auml;t
-                    <select name="device" class="form-control" id="device" onchange="changeDevice()">
+                    <select name="device" class="form-control" id="device" onchange="changeDevice()" required>
                         <?php
                         $devices = $conn->query("SELECT device_id, device_name FROM Device");
                         foreach ($devices as $device) {
