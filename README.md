@@ -38,12 +38,7 @@ of my school. Don't expect too much from it, it's just a school project.
 I use php and MariaDB for this project. You can run it with XAMPP or something similar. (A Docker-Compose is also
 included).
 
-In terms of Front-End, I use tabler.io, which is a free and open-source CSS framework. For a smoother user experience,
-I use flamethrower (a client-side router).
-
-The page is loaded in two different ways. The first time, the page is loaded with the server-side router. After that,
-the client-side router hydrates the page. Once a user clicks on a link, the client-side router sends a request to the
-server, which then returns the requested page. The current page is then replaced with the new page.
+In terms of Front-End, I use tabler.io, which is a free CSS framework.
 
 For the backend, I use PHP with composer. If you take a look at the code structure, you'll find a `config` and
 a `modules` directory. The config directory contains the configuration files for the backend and cannot be accessed from the
@@ -51,7 +46,21 @@ outside. The modules directory contains the modules of the backend. In here, we 
 less code duplication and a smoother development experience.
 
 For authentication, I use PHP's session management. A user can log in with his username and password or a magic link. 
-The latter is also used while registering a new user.
+The latter is also used while registering a new user. 
+
+Emails are based on the PHPMailer library which is included via composer. For speed, the emails are sent asynchronously
+with a table in the database acting as a cache. 
+
+In terms of security, I use prepared statements for all database queries to prevent XSS attacks. I also use the
+`password_hash` function to hash the passwords with a random salt.
+
+The code is structured using PHP namespaces and a function for auto-loading all needed dependencies.
+I mostly use the PSR-4 standard for naming the namespaces. 
+Also, the project uses php classes for more flexibility and less code duplication.
+
+To create the initial user, first configure your database connection in the `src/config` directory. Then, run the
+`init.php` script in the `src` directory. This will create the database tables and the initial user with administrative
+privileges. The password can be set after the first login using a magic link provided by the script.
 
 ## ER-Diagram & Relational Model
 

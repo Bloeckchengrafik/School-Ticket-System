@@ -4,7 +4,7 @@
 
 User(<u>user_id</u>, first_name, last_name, email, account_class, created_at)<br>
 UserPassKey(<u>↑user_id</u>, password_hash, last_updated)<br>
-UserMagicLinkKey(<u>↑user_id</u>, code)<br>
+UserMagicLinkKey(<u>↑user_id</u>, <u>code</u>)<br>
 Ticket(<u>ticket_id</u>, title, created_at, status, ↑user_id, ↑room_id, ↑device_id)<br>
 isMemberIn(<u>↑user_id</u>, <u>↑ticket_id</u>)<br>
 Message(<u>message_id</u>, content, message_type, created_at, ↑user_id, ↑ticket_id)<br>

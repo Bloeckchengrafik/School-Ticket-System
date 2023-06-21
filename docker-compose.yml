@@ -1,21 +1,6 @@
 version: "3"
 
 services:
-  nginx:
-    image: nginx:alpine
-    volumes:
-      - ./sites:/etc/nginx/conf.d
-      - ./src:/usr/share/nginx/html
-    depends_on:
-      - php
-    ports:
-      - "80:80"
-  php:
-    image: bitnami/php-fpm
-    volumes:
-      - ./src:/www
-    depends_on:
-      - mariadb
   mariadb:
     image: mariadb
     environment:
